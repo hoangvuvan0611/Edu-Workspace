@@ -12,8 +12,8 @@ import java.util.Optional;
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
     Optional<Subject> findBySubjectCode(String subjectCode);
-//    List<Subject> findAllByUserId(String userId);
-//    @Modifying
-//    @Transactional
-//    Integer deleteAllByUserId(String userId);
+    List<Subject> findAllByUserId(Long user_id);
+    @Modifying
+    @Transactional
+    Integer deleteAllByUserId(Long user_id);
 }

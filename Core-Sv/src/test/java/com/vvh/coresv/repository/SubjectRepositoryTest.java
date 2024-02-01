@@ -72,7 +72,7 @@ class SubjectRepositoryTest {
     @Test
     void deleteAllByTeacher() {
         //Give
-        String teacherId = "1";
+        Long teacherId = 1L;
 
         //When
         Integer i = subjectRepository.deleteAllByUserId(teacherId);
@@ -84,7 +84,7 @@ class SubjectRepositoryTest {
     @Test
     void findAllByTeacherId(){
         //Give
-        String teacherId = "1";
+        Long teacherId = 1L;
 
         //When
         List<Subject> subjectList = subjectRepository.findAllByUserId(teacherId);
@@ -103,8 +103,8 @@ class SubjectRepositoryTest {
 
     private User mockTeacher(){
         return User.builder()
-                .id("2")
-                .name("MockTeacher")
+                .id(2L)
+                .userName("MockTeacher")
                 .build();
     }
 }
