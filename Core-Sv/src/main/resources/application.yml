@@ -1,0 +1,42 @@
+
+server:
+  port: 8082
+
+spring:
+##Connect to database
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/EduDb
+    username: postgres
+    password: Hoanglam06112003@
+##Jpa config
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+
+
+  main:
+    banner-mode: off
+    allow-circular-references: true
+  application:
+    name: core
+
+
+url:
+  core: https://0a78-118-70-132-104.ngrok-free.app/cam
+  website: https://daotao.vnua.edu.vn/Default.aspx?page=thoikhoabieu&sta=1&id=
+
+jwt:
+  secret: 8734657346587346587346587346587345
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
