@@ -28,8 +28,8 @@ class MeetingRepositoryTest {
     @BeforeEach
     void init(){
         User user = User.builder()
-                .id("6656485")
-                .name("VuVanHoang")
+                .id(1L)
+                .userName("VuVanHoang")
                 .build();
         Subject subject = Subject.builder()
                 .subjectName("testSubject")

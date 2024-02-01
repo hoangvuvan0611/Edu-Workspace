@@ -24,8 +24,8 @@ class UserRepositoryTest {
     void init(){
         for(int i=0; i<10; i++){
             User user = User.builder()
-                    .id(String.valueOf(i))
-                    .name("Teacher " + i)
+                    .id((long) i)
+                    .userName("Teacher " + i)
                     .build();
             entityManager.persistAndFlush(user);
         }
@@ -54,13 +54,13 @@ class UserRepositoryTest {
 
         //Then
         assertEquals(userEntity.getId(), user.getId());
-        assertEquals(user.getName(), "Teacher 11");
+        assertEquals(user.getUserName(), "Teacher 11");
     }
 
     private User mockTeacher(){
         return User.builder()
-                .id("11")
-                .name("Teacher 11")
+                .id(11L)
+                .userName("Teacher 11")
                 .build();
     }
 }

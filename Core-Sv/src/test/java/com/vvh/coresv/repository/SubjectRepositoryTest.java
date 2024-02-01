@@ -26,8 +26,8 @@ class SubjectRepositoryTest {
     @BeforeEach
     void init(){
         User user = User.builder()
-                .id("1")
-                .name("Teacher")
+                .id(1L)
+                .userName("Teacher")
                 .build();
         Set<Subject> subjectSet = new HashSet<>();
         for(int i=0; i<10; i++){
