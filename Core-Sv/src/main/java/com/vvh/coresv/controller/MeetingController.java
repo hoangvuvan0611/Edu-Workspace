@@ -38,10 +38,10 @@ public class MeetingController {
         return baseResponseListItem;
     }
 
-    @GetMapping("/teacherId={teacherId}")
-    public BaseResponseListItem<MeetingResponse> findAllByTeacherId(@PathVariable String teacherId){
+    @GetMapping("/teacherCode={teacherCode}")
+    public BaseResponseListItem<MeetingResponse> findAllByTeacherId(@PathVariable String teacherCode){
         BaseResponseListItem<MeetingResponse> baseResponseListItem = new BaseResponseListItem<>();
-        List<MeetingResponse> meetingList = meetingService.findAllByUserId(teacherId);
+        List<MeetingResponse> meetingList = meetingService.findAllByUserId(teacherCode);
         baseResponseListItem.setResult(meetingList.size(), meetingList);
         return baseResponseListItem;
     }

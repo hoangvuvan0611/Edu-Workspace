@@ -24,6 +24,6 @@ public interface MeetingRepository extends JpaRepository<Meeting, String> {
             "from Meeting m " +
             "join Subject s on s.id = m.subject.id " +
             "join User u on u.id = s.user.id " +
-            "where u.id = :userId")
-    List<MeetingDTO> findAllByUserId(String userId);
+            "where u.code = :code")
+    List<MeetingDTO> findAllByUserId(String code);
 }

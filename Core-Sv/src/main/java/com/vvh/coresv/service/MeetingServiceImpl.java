@@ -26,8 +26,8 @@ public class MeetingServiceImpl implements MeetingService{
     }
 
     @Override
-    public List<MeetingResponse> findAllByUserId(String teacherId) {
-        return meetingRepository.findAllByUserId(teacherId).stream().map(meetingDTO -> {
+    public List<MeetingResponse> findAllByUserId(String teacherCode) {
+        return meetingRepository.findAllByUserId(teacherCode).stream().map(meetingDTO -> {
             return modelMapper.map(meetingDTO, MeetingResponse.class);
         }).toList();
     }

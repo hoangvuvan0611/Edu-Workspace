@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface MeetingService {
     List<Meeting> findAllBySubjectId(Long subjectId);
-    List<MeetingResponse> findAllByUserId(String teacherId);
+    List<MeetingResponse> findAllByUserId(String teacherCode);
 }
