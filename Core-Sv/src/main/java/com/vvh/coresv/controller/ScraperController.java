@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/core/v1/scraper")
+@RequestMapping("/api/v1/core/scraper")
 public class ScraperController {
     private final ScraperService scraperService;
 
