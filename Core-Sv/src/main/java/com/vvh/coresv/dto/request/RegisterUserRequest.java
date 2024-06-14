@@ -1,4 +1,4 @@
-package com.vvh.coresv.request;
+package com.vvh.coresv.dto.request;
 
 import com.vvh.coresv.constant.ValidateAttribute;
 import jakarta.validation.constraints.Email;

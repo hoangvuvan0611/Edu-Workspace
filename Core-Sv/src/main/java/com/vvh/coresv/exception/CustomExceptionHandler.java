@@ -53,7 +53,7 @@ public class CustomExceptionHandler {
 
     @ResponseStatus(UNAUTHORIZED)
     @ResponseBody
-    @ExceptionHandler(value = AuthenticationException.class)
+    @ExceptionHandler(value = {AuthenticationException.class})
     public BaseResponseError authenticationException(AuthenticationException ex){
         return new BaseResponseError(
                 UNAUTHORIZED,

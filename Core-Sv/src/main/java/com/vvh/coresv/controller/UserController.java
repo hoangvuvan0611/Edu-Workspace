@@ -1,6 +1,6 @@
 package com.vvh.coresv.controller;
 
-import com.vvh.coresv.request.RegisterUserRequest;
+import com.vvh.coresv.dto.request.RegisterUserRequest;
 import com.vvh.coresv.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;

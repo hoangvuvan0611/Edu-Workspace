@@ -1,6 +1,5 @@
 package com.vvh.coresv.service;
 
-import com.vvh.coresv.dto.MeetingDTO;
 import com.vvh.coresv.entity.Meeting;
 import com.vvh.coresv.repository.MeetingRepository;
 import com.vvh.coresv.response.meeting.MeetingResponse;
