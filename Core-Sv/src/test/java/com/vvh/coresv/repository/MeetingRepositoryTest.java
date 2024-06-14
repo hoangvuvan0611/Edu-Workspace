@@ -1,6 +1,6 @@
 package com.vvh.coresv.repository;
 
-import com.vvh.coresv.dto.MeetingDTO;
+import com.vvh.coresv.dto.model.MeetingDTO;
 import com.vvh.coresv.entity.Meeting;
 import com.vvh.coresv.entity.Subject;
 import com.vvh.coresv.entity.User;

@@ -1,4 +1,4 @@
-package com.vvh.authsv.request;
+package com.vvh.authsv.dto.request;
 
 import com.vvh.authsv.constant.ValidateAttribute;
 import jakarta.validation.constraints.Email;

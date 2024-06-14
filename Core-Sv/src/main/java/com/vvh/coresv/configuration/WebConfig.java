@@ -1,4 +1,4 @@
-package com.vvh.coresv.config;
+package com.vvh.coresv.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

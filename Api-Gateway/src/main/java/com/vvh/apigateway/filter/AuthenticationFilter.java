@@ -2,7 +2,6 @@ package com.vvh.apigateway.filter;
 
 
 import com.vvh.apigateway.util.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
@@ -13,28 +12,30 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
 @Component
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
-    @Autowired
-    private RouterValidator routerValidator;
+    private final RouterValidator routerValidator;
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
 
-    public AuthenticationFilter() {
+    public AuthenticationFilter(RouterValidator routerValidator, JwtUtil jwtUtil) {
         super(Config.class);
+        this.routerValidator = routerValidator;
+        this.jwtUtil = jwtUtil;
     }
 
     @Override
     public GatewayFilter apply(Config config) {
-        return ((exchange, chain) ->{
+        return ((exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
             if(routerValidator.isSecured.test(request)){
                 //Header contains token or not
                 if(authMissing(request))
                     return onError(exchange);
 
-                String token = request.getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
+                String token = Objects.requireNonNull(request.getHeaders().get(HttpHeaders.AUTHORIZATION)).get(0);
                 if(token != null && token.startsWith("Bearer "))
                     token = token.substring(7);
 
@@ -50,6 +51,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     private Mono<Void> onError(ServerWebExchange exchange) {
         ServerHttpResponse response = exchange.getResponse();
         response.setStatusCode(HttpStatus.UNAUTHORIZED);
+        response.setRawStatusCode(401);
         return response.setComplete();
     }
     private boolean authMissing(ServerHttpRequest request) {

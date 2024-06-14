@@ -1,13 +1,11 @@
 package com.vvh.coresv.controller;
 
-import com.vvh.coresv.dto.MeetingDTO;
 import com.vvh.coresv.entity.Meeting;
-import com.vvh.coresv.request.CreateMeetingRequest;
+import com.vvh.coresv.dto.request.CreateMeetingRequest;
 import com.vvh.coresv.response.base.BaseResponseListItem;
 import com.vvh.coresv.response.meeting.MeetingResponse;
 import com.vvh.coresv.service.MeetingService;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

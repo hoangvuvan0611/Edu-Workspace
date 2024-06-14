@@ -3,7 +3,7 @@ package com.vvh.coresv.service;
 import com.vvh.coresv.entity.User;
 import com.vvh.coresv.enums.Role;
 import com.vvh.coresv.repository.UserRepository;
-import com.vvh.coresv.request.RegisterUserRequest;
+import com.vvh.coresv.dto.request.RegisterUserRequest;
 import org.springframework.stereotype.Service;
 
 @Service

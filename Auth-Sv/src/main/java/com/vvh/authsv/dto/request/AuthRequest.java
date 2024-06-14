@@ -1,17 +1,16 @@
-package com.vvh.authsv.dto;
+package com.vvh.authsv.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class UserDto {
-    private String id;
+public class AuthRequest {
+    @NotBlank
     private String userName;
+    @NotBlank
     private String password;
-    private String role;
 }

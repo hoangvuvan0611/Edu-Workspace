@@ -1,4 +1,4 @@
-package com.vvh.coresv.request;
+package com.vvh.coresv.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

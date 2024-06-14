@@ -1,4 +1,4 @@
-package com.vvh.coresv.dto;
+package com.vvh.authsv.dto.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.vvh.coresv.request;
+package com.vvh.coresv.dto.request;
 
 public class CreateMeetingRequest {
     private String subjectId;

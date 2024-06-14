@@ -14,6 +14,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -37,7 +38,6 @@ public class ScraperServiceImpl implements ScraperService{
     private final SubjectRepository subjectRepository;
     private final MeetingRepository meetingRepository;
     private final StudentRepository studentRepository;
-
     private final UserRepository userRepository;
 
     public ScraperServiceImpl(SubjectRepository subjectRepository, MeetingRepository meetingRepository, StudentRepository studentRepository, UserRepository userRepository) {
@@ -68,85 +68,120 @@ public class ScraperServiceImpl implements ScraperService{
 
         if(document == null) throw new NotFoundException("Không tìm thấy dữ liệu yêu cầu");
 
-        Element element = document.getElementsByClass("grid-roll2").first();
-        Elements elementsTable = element.children();
+        document = selectSemester(document, url, "Học kỳ 2 - Năm học 2023-2024");
+
+        Elements elementsTable = Objects.requireNonNull(
+                document.getElementsByClass("grid-roll2").first()
+        ).children();
+
 
         for (Element elementTable: elementsTable) {
-            Elements elementsTbody = elementTable.children();
-            for (Element elementTbody: elementsTbody){
-                Elements elementsTr = elementTbody.children();
-                for(Element elementTr: elementsTr){
-                    //Element store data
-                    Elements elementsTd = elementTr.children();
-                    List<String> day = List.of(elementsTd.get(8).text().split(" "));
-                    List<String> startSlot = List.of(elementsTd.get(9).text().split(" "));
-                    List<String> sumSlot = List.of(elementsTd.get(10).text().split(" "));
-                    List<String> room = List.of(elementsTd.get(11).text().split(" "));
-                    List<String> time = List.of(elementsTd.get(13).text().split(" "));
+            Elements elementsTd = elementTable.child(0).child(0).children();
 
-                    //Scraping subject
-                    subject = Subject.builder()
-                            .subjectCode(elementsTd.get(0).text())
-                            .subjectName(elementsTd.get(1).text())
-                            .groupName(elementsTd.get(2).text())
-                            .creditNum(Byte.valueOf(elementsTd.get(3).text()))
-                            .classCode(elementsTd.get(4).text())
-                            .meetingSet(new HashSet<>())
-                            .user(user)
-                            .build();
+            System.out.println(elementsTd);
+            List<String> day = List.of(elementsTd.get(8).text().split(" "));
+            List<String> startSlot = List.of(elementsTd.get(9).text().split(" "));
+            List<String> sumSlot = List.of(elementsTd.get(10).text().split(" "));
+            List<String> room = List.of(elementsTd.get(11).text().split(" "));
+            List<String> time = List.of(elementsTd.get(13).text().split(" "));
 
-                    //Scraping student
-                    Elements elements = elementsTd.get(14).getElementsByTag("a");
-                    for(Element el : elements){
-                        if(StringUtils.hasText(el.attr("href"))){
-                            List<Student> studentList = getDataStudent(el.attr("href"));
-                            for(Student student: studentList){
-                                Optional<Student> optionalStudent = studentRepository.findById(student.getId());
-                                if(optionalStudent.isPresent()){
-                                    Student studentUpdate = optionalStudent.get();
-                                    studentUpdate.getSubjectList().add(subject);
-                                    studentRepository.save(studentUpdate);
-                                }else {
-                                    student.setSubjectList(Collections.singletonList(subject));
-                                    studentRepository.save(student);
-                                }
-                            }
-                            subject.setStudentList(studentList);
-                            break;
+            //Scraping subject
+            subject = Subject.builder()
+                    .subjectCode(elementsTd.get(0).text())
+                    .subjectName(elementsTd.get(1).text())
+                    .groupName(elementsTd.get(2).text())
+                    .creditNum(Byte.valueOf(elementsTd.get(3).text()))
+                    .classCode(elementsTd.get(4).text())
+                    .meetingSet(new HashSet<>())
+                    .user(user)
+                    .build();
+
+            //Scraping student
+            Elements elements = elementsTd.get(14).getElementsByTag("a");
+            for(Element el : elements){
+                if(StringUtils.hasText(el.attr("href"))){
+                    List<Student> studentList = getDataStudent(el.attr("href"));
+                    for(Student student: studentList){
+                        Optional<Student> optionalStudent = studentRepository.findById(student.getId());
+                        if(optionalStudent.isPresent()){
+                            Student studentUpdate = optionalStudent.get();
+                            studentUpdate.getSubjectList().add(subject);
+                            studentRepository.save(studentUpdate);
+                        }else {
+                            student.setSubjectList(Collections.singletonList(subject));
+                            studentRepository.save(student);
                         }
                     }
-
-                    //Scraping Meeting
-                    Set<Meeting> meetingSet = new HashSet<>();
-                    for(byte i=0; i<time.size(); i++){
-                        List<Byte> listWeek = formatWeek(time.get(i));
-                        for(int j=0; j< listWeek.size(); j++){
-                            meeting = Meeting.builder()
-                                    .startEndTime(
-                                            dateTimeFormat(
-                                                    formatDay(day.get(i)),
-                                                    listWeek.get(j),
-                                                    getSemeterStartTime(document),
-                                                    startSlot.get(i),
-                                                    sumSlot.get(i)
-                                            )
-                                    )
-                                    .roomName(room.get(i))
-                                    .build();
-
-                            meeting.setSubject(subject);
-                            meetingRepository.save(meeting);
-                            meetingSet.add(meeting);
-                        }
-                    }
-                    subjectRepository.save(subject);
-                    subject.setMeetingSet(meetingSet);
+                    subject.setStudentList(studentList);
+                    break;
                 }
             }
+
+            //Scraping Meeting
+            Set<Meeting> meetingSet = new HashSet<>();
+            for(byte i=0; i<time.size(); i++){
+                List<Byte> listWeek = formatWeek(time.get(i));
+                for(int j=0; j< listWeek.size(); j++){
+                    meeting = Meeting.builder()
+                            .startEndTime(
+                                    dateTimeFormat(
+                                            formatDay(day.get(i)),
+                                            listWeek.get(j),
+                                            getSemeterStartTime(document),
+                                            startSlot.get(i),
+                                            sumSlot.get(i)
+                                    )
+                            )
+                            .roomName(room.get(i))
+                            .build();
+
+                    meeting.setSubject(subject);
+                    meetingRepository.save(meeting);
+                    meetingSet.add(meeting);
+                }
+            }
+            subjectRepository.save(subject);
+            subject.setMeetingSet(meetingSet);
+
         }
         user.setSubjectSet(subjectSet);
         userRepository.save(user);
         return subjectSet;
+    }
+
+    @SneakyThrows
+    Document selectSemester(Document document,String url, String semester) {
+        Element elementDropdownSelectSemester = document.getElementById("ctl00_ContentPlaceHolder1_ctl00_ddlChonNHHK");
+        if(elementDropdownSelectSemester == null) {
+            return null;
+        }
+        // generate GET request __VIEWSTATE and __VIEWSTATEGENERATOR
+        Connection.Response response = Jsoup.connect(url)
+                .method(Connection.Method.GET)
+                .execute();
+        Map<String, String> cookies = response.cookies();
+        Document documentCookies = response.parse();
+        String viewState = documentCookies.select("input[name=__VIEWSTATE]").attr("value");
+        String viewStateGenerator = documentCookies.select("input[name=__VIEWSTATEGENERATOR]").attr("value");
+
+        String valueOfSelect = "";
+        //get option list semester
+        Elements options = elementDropdownSelectSemester.select("option");
+        for(Element option: options) {
+            if(option.text().trim().equals(semester.trim())) {
+                valueOfSelect = option.attr("value");
+            }
+        }
+
+        // Select the semester again to get data
+        return Jsoup.connect(url)
+                .timeout(30000)
+                .cookies(cookies)
+                .data("__VIEWSTATE", viewState)
+                .data("__VIEWSTATEGENERATOR", viewStateGenerator)
+                .data("ctl00$ContentPlaceHolder1$ctl00$ddlChonNHHK", valueOfSelect)
+                .post();
+
     }
 
     private List<Byte> formatWeek(String num){
@@ -182,6 +217,7 @@ public class ScraperServiceImpl implements ScraperService{
     }
     @SneakyThrows
     private List<Student> getDataStudent(String urlListStudent){
+        System.out.println(urlListStudent);
         Document document = Jsoup.connect(this.url.substring(0, 27) + urlListStudent).get();
         Elements elements = document
                 .getElementsByClass("grid-view").first()
@@ -199,6 +235,7 @@ public class ScraperServiceImpl implements ScraperService{
                     .className(elementsTd.get(5).text())
                     .build();
             studentSet.add(student);
+            System.out.println(student.getLastName());
         }
         return studentSet;
     }

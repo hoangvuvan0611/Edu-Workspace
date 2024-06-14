@@ -1,4 +1,4 @@
-package com.vvh.authsv.response;
+package com.vvh.authsv.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

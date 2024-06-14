@@ -10,12 +10,14 @@ spring:
           predicates:
             - Path=/api/v1/core/**
           filters:
+# When there is a call from the path /api/v1/core/**, it is redirected to AuthenticationFilter
             - AuthenticationFilter
 
         -  id: auth
            uri: lb://auth
            predicates: Path=/api/v1/auth/**
-      globalcors:
+
+      global cors:
         cors-configurations:
           '[/**]':
             allowedOrigins: '*'

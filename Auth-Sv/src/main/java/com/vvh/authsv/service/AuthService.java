@@ -1,8 +1,8 @@
 package com.vvh.authsv.service;
 
-import com.vvh.authsv.request.AuthRequest;
-import com.vvh.authsv.request.RegisterUserRequest;
-import com.vvh.authsv.response.AuthResponse;
+import com.vvh.authsv.dto.request.AuthRequest;
+import com.vvh.authsv.dto.request.RegisterUserRequest;
+import com.vvh.authsv.dto.response.AuthResponse;
 
 public interface AuthService {
     void registerUser(RegisterUserRequest request);
