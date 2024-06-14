@@ -13,4 +13,8 @@ Các tính năng hỗ trợ;
   - Tạo qr điểm danh.
   - Hỗ trợ quản lý sinh viên như thêm sửa xóa
 
+## WorkFlow
+![image](https://github.com/hoangvuvan0611/Edu-Workspace/assets/113603055/7da2135a-8459-4d0a-ae77-b05eb5db234d)
+
+
 ![image](https://github.com/hoangvuvan0611/Edu-Workspace/assets/113603055/bd7db057-44a1-47de-83f7-1b24093a600c)
