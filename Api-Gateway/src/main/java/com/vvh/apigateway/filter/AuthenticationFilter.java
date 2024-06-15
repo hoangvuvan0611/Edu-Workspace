@@ -41,7 +41,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
                 try{
                     jwtUtil.validateToken(token);
-                }catch (Exception ex){
+                }catch (Exception ex) {
                     return onError(exchange);
                 }
             }

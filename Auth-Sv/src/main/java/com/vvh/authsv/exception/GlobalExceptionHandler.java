@@ -51,6 +51,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ExceptionErrorResponse handleMethodResourceNotFoundException(ResourceNotFoundException ex, WebRequest webRequest) {
         String errorPath = webRequest.getDescription(false).replace("uri=", "");
+
         return ExceptionErrorResponse.builder()
                 .timestamp(new Date())
                 .status(HttpStatus.NOT_FOUND.value())

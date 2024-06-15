@@ -30,19 +30,27 @@ public class AuthController {
         log.info(request.getUserName());
         try{
             authService.registerUser(request);
-            return new ResponseData<>(HttpStatus.CREATED.value(), "User registered successfully");
+            return new ResponseData<>(true ,HttpStatus.CREATED.value(), "User registered successfully");
         } catch (AlreadyExistsException ex){
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
         }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> authUser(@Valid @RequestBody AuthRequest request){
-        return ResponseEntity.ok(authService.authUser(request));
+    public ResponseData<?> authUser(@Valid @RequestBody AuthRequest request){
+        log.info(request.getUserName());
+        try{
+            AuthResponse authResponse = authService.authUser(request);
+            return new ResponseData<>(true, HttpStatus.OK.value(), "User logged in successfully", authResponse);
+        } catch (Exception ex) {
+            return new ResponseError(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+        }
     }
 
     @GetMapping("/validate/{token}")
     public ResponseEntity<?> validateToken(@PathVariable String token){
         return ResponseEntity.ok(authService.validateToken(token));
     }
+
+
 }

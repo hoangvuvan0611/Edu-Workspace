@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class ResponseData <T> {
+    private final boolean success;
     private final int status;
     private final String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -16,7 +17,8 @@ public class ResponseData <T> {
      * @param message
      * @param data
      */
-    public ResponseData(int status, String message, T data) {
+    public ResponseData(boolean success,int status, String message, T data) {
+        this.success = success;
         this.status = status;
         this.message = message;
         this.data = data;
@@ -27,7 +29,8 @@ public class ResponseData <T> {
      * @param status
      * @param message
      */
-    public ResponseData(int status, String message) {
+    public ResponseData(boolean success,int status, String message) {
+        this.success = success;
         this.status = status;
         this.message = message;
     }

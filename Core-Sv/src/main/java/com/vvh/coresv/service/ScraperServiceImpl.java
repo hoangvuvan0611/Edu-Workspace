@@ -11,7 +11,6 @@ import com.vvh.coresv.repository.SubjectRepository;
 import com.vvh.coresv.repository.UserRepository;
 import com.vvh.coresv.utils.DateProvider;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.NotFoundException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Connection;
@@ -34,6 +33,8 @@ public class ScraperServiceImpl implements ScraperService{
 
     @Value("${url.website}")
     private String url;
+
+    Map<String, String> cookies = new HashMap<>();
 
     private final SubjectRepository subjectRepository;
     private final MeetingRepository meetingRepository;
@@ -66,19 +67,15 @@ public class ScraperServiceImpl implements ScraperService{
 
         Document document = Jsoup.connect(url).get();
 
-        if(document == null) throw new NotFoundException("Không tìm thấy dữ liệu yêu cầu");
-
         document = selectSemester(document, url, "Học kỳ 2 - Năm học 2023-2024");
 
         Elements elementsTable = Objects.requireNonNull(
                 document.getElementsByClass("grid-roll2").first()
         ).children();
 
-
         for (Element elementTable: elementsTable) {
             Elements elementsTd = elementTable.child(0).child(0).children();
 
-            System.out.println(elementsTd);
             List<String> day = List.of(elementsTd.get(8).text().split(" "));
             List<String> startSlot = List.of(elementsTd.get(9).text().split(" "));
             List<String> sumSlot = List.of(elementsTd.get(10).text().split(" "));
@@ -121,12 +118,12 @@ public class ScraperServiceImpl implements ScraperService{
             Set<Meeting> meetingSet = new HashSet<>();
             for(byte i=0; i<time.size(); i++){
                 List<Byte> listWeek = formatWeek(time.get(i));
-                for(int j=0; j< listWeek.size(); j++){
+                for (Byte aByte : listWeek) {
                     meeting = Meeting.builder()
                             .startEndTime(
                                     dateTimeFormat(
                                             formatDay(day.get(i)),
-                                            listWeek.get(j),
+                                            aByte,
                                             getSemeterStartTime(document),
                                             startSlot.get(i),
                                             sumSlot.get(i)
@@ -150,6 +147,36 @@ public class ScraperServiceImpl implements ScraperService{
     }
 
     @SneakyThrows
+    private List<Student> getDataStudent(String urlListStudent){
+
+        // Use cookies saved to get data student follow semester choose
+        Document document = Jsoup.connect(this.url.substring(0, 27) + urlListStudent)
+                .timeout(45000)
+                .cookies(cookies)
+                .get();
+
+        Elements elements = Objects.requireNonNull(
+                document.getElementsByClass("grid-view").first()
+        ).getAllElements();
+        Elements elementsTr = elements.first().getElementsByTag("tr");
+
+        List<Student> studentSet = new ArrayList<>();
+        Student student;
+        for(int i=1; i<elementsTr.size(); i++){
+
+            student = Student.builder()
+                    .id(elementsTr.get(1).text())
+                    .firstName(elementsTr.get(2).text())
+                    .lastName(elementsTr.get(3).text())
+                    .classCode(elementsTr.get(4).text())
+                    .className(elementsTr.get(5).text())
+                    .build();
+            studentSet.add(student);
+        }
+        return studentSet;
+    }
+
+    @SneakyThrows
     Document selectSemester(Document document,String url, String semester) {
         Element elementDropdownSelectSemester = document.getElementById("ctl00_ContentPlaceHolder1_ctl00_ddlChonNHHK");
         if(elementDropdownSelectSemester == null) {
@@ -159,7 +186,6 @@ public class ScraperServiceImpl implements ScraperService{
         Connection.Response response = Jsoup.connect(url)
                 .method(Connection.Method.GET)
                 .execute();
-        Map<String, String> cookies = response.cookies();
         Document documentCookies = response.parse();
         String viewState = documentCookies.select("input[name=__VIEWSTATE]").attr("value");
         String viewStateGenerator = documentCookies.select("input[name=__VIEWSTATEGENERATOR]").attr("value");
@@ -173,6 +199,13 @@ public class ScraperServiceImpl implements ScraperService{
             }
         }
 
+        // Save cookies
+        Connection.Response initialResponse = Jsoup.connect(url)
+                .timeout(30000)
+                .method(Connection.Method.GET)
+                .execute();
+        cookies.putAll(initialResponse.cookies());
+
         // Select the semester again to get data
         return Jsoup.connect(url)
                 .timeout(30000)
@@ -181,7 +214,6 @@ public class ScraperServiceImpl implements ScraperService{
                 .data("__VIEWSTATEGENERATOR", viewStateGenerator)
                 .data("ctl00$ContentPlaceHolder1$ctl00$ddlChonNHHK", valueOfSelect)
                 .post();
-
     }
 
     private List<Byte> formatWeek(String num){
@@ -215,33 +247,8 @@ public class ScraperServiceImpl implements ScraperService{
         String date = timeStartSemeter.text().substring(indexChar - 10, indexChar);
         return DateProvider.convertStringToDate(date, DateTimeConstant.DATE_FORMAT);
     }
-    @SneakyThrows
-    private List<Student> getDataStudent(String urlListStudent){
-        System.out.println(urlListStudent);
-        Document document = Jsoup.connect(this.url.substring(0, 27) + urlListStudent).get();
-        Elements elements = document
-                .getElementsByClass("grid-view").first()
-                .getElementsByTag("tr");
-
-        List<Student> studentSet = new ArrayList<>();
-        Student student = new Student();
-        for(int i=1; i<elements.size(); i++){
-            Elements elementsTd = elements.get(i).getElementsByTag("td");
-            student = Student.builder()
-                    .id(elementsTd.get(1).text())
-                    .firstName(elementsTd.get(2).text())
-                    .lastName(elementsTd.get(3).text())
-                    .classCode(elementsTd.get(4).text())
-                    .className(elementsTd.get(5).text())
-                    .build();
-            studentSet.add(student);
-            System.out.println(student.getLastName());
-        }
-        return studentSet;
-    }
 
     private static List<Date> dateTimeFormat(Byte day, Byte week, Date timeStartSemeter, String startSlot, String sumSlot){
-
         //Setup startDate of week
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(timeStartSemeter);

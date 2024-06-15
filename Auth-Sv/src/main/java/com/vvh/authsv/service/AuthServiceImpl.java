@@ -44,10 +44,10 @@ public class AuthServiceImpl implements AuthService{
     @Override
     public void registerUser(RegisterUserRequest request) {
         if(userCredentialRepository.existsByEmail(request.getEmail()))
-            throw new AlreadyExistsException("Email already exists!");
+            throw new AlreadyExistsException("Email already exists");
 
         if(userCredentialRepository.existsByUserName(request.getUserName()))
-            throw new AlreadyExistsException("Username already exists!");
+            throw new AlreadyExistsException("Username already exists");
 
         request.setPassword(passwordEncoder.encode(request.getPassword()));
         restTemplate.postForObject(baseUrl, request, RegisterUserRequest.class);
@@ -85,6 +85,4 @@ public class AuthServiceImpl implements AuthService{
                 new UsernamePasswordAuthenticationToken(username, password)
         );
     }
-
-
 }

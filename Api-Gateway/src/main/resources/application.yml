@@ -16,15 +16,16 @@ spring:
         -  id: auth
            uri: lb://auth
            predicates: Path=/api/v1/auth/**
-
       global cors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: '*'
+            allowedOrigins: "http://localhost:3000"
             allowed-headers: '*'
-            allowedMethods: '*'
+            allowedMethods:
+              - GET
+              - POST
+            allow-credentials: true
             maxAge: 3600
-
 
   main:
     banner-mode: off

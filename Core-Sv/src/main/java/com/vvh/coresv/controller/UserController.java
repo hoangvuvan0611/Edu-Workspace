@@ -1,13 +1,13 @@
 package com.vvh.coresv.controller;
 
 import com.vvh.coresv.dto.request.RegisterUserRequest;
+import com.vvh.coresv.dto.response.ResponseData;
+import com.vvh.coresv.entity.User;
 import com.vvh.coresv.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -24,5 +24,16 @@ public class UserController {
     public void registerUser(@Valid @RequestBody RegisterUserRequest request){
         log.info("New register: {}", request.getUserName());
         userService.registerUser(request);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseData<?> getUser(@PathVariable Long id) {
+        log.info("Get user: {}", id);
+        try{
+            return new ResponseData<>(true, HttpStatus.OK.value(), "Get user successfully", userService.getUserById(id));
+        } catch (Exception ex) {
+
+        }
+        return null;
     }
 }
