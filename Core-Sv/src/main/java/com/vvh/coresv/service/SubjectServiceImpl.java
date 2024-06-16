@@ -16,18 +16,23 @@ public class SubjectServiceImpl implements SubjectService{
     }
 
     @Override
-    public List<Subject> getAll(String teacherId) {
+    public List<Subject> getAll(String userId) {
         return subjectRepository.findAll();
     }
 
     @Override
     public void addSubject(Subject subject) {
-
+        subjectRepository.save(subject);
     }
 
     @Override
     public void findSubject(String subjectCode, String teacherCode) {
 
+    }
+
+    @Override
+    public void deleteSubjectsByUserId(Long userId) {
+        subjectRepository.deleteAllByUserId(userId);
     }
 
 }

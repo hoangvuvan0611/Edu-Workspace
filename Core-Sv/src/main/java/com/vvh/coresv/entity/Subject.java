@@ -33,7 +33,7 @@ public class Subject {
     @Column(name = "class_code")
     private String classCode;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
@@ -41,7 +41,7 @@ public class Subject {
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     public Set<Meeting> meetingSet = new HashSet<>();
 
-    @ManyToMany()
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "subjects_students",
             joinColumns = @JoinColumn(name = "subject_id"),

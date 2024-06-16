@@ -47,4 +47,4 @@ logging:
     path: /static/
     name: test.log
   level:
-    root: info
+    root: error

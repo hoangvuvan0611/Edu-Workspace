@@ -30,7 +30,7 @@ public class UserController {
     public ResponseData<?> getUser(@PathVariable Long id) {
         log.info("Get user: {}", id);
         try{
-            return new ResponseData<>(true, HttpStatus.OK.value(), "Get user successfully", userService.getUserById(id));
+            return new ResponseData<>(HttpStatus.OK.value(), "Get user successfully", userService.getUserById(id));
         } catch (Exception ex) {
 
         }

@@ -17,8 +17,8 @@ public class ResponseData<T> {
      * @param message
      * @param data
      */
-    public ResponseData( boolean success,int status, String message, T data) {
-        this.success = success;
+    public ResponseData(int status, String message, T data) {
+        this.success = true;
         this.status = status;
         this.message = message;
         this.data = data;
