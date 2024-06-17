@@ -1,7 +1,10 @@
 package com.vvh.coresv.constant;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.apache.http.HttpStatus;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ErrorCodeStatus implements HttpStatus {
 
     /*
