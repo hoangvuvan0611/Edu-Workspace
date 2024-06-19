@@ -1,5 +1,8 @@
 #EduWork - Space
 
+![image](https://github.com/hoangvuvan0611/Edu-Workspace/assets/113603055/be2e092e-c110-4db7-a962-613b273e7a2c)
+
+
 ## Lời nói đầu:
 Dự án WorkSpace xây dựng hệ thống cung cấp hỗ trợ quản lý công việc như quản lý lịch làm việc, quản lý sinh viên, điểm danh.
 ## Liên hệ với tôi: 
