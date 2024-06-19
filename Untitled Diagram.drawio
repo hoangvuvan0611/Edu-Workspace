@@ -1,9 +1,92 @@
-<mxfile host="app.diagrams.net" modified="2024-06-19T13:15:58.550Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" version="24.5.4" etag="szmRGVGgkZLVOvOHKwc2" type="github">
+<mxfile host="app.diagrams.net" modified="2024-06-19T14:02:49.608Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="ISIOM4Gc4XkU18Z-FrkL" version="24.5.4" type="github">
   <diagram name="Page-1" id="nMNwG6gz0d6LQUTYZvLh">
-    <mxGraphModel>
+    <mxGraphModel dx="6294" dy="696" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-3" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="60" width="1910" height="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-4" target="9yRi2wLpPt7sHVXWHrIx-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-4" target="9yRi2wLpPt7sHVXWHrIx-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-4" target="9yRi2wLpPt7sHVXWHrIx-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-4" value="React Client&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/unicons-line-vol-5/24/react-128.png" vertex="1" parent="1">
+          <mxGeometry x="130" y="530" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-8" target="9yRi2wLpPt7sHVXWHrIx-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-8" value="Service Registry Eureka" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.registry;" vertex="1" parent="1">
+          <mxGeometry x="459" y="350" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-9" target="9yRi2wLpPt7sHVXWHrIx-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-9" target="9yRi2wLpPt7sHVXWHrIx-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-9" target="9yRi2wLpPt7sHVXWHrIx-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-9" value="Service Spring Cloud Gateway&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#7AA116;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.iot_device_gateway;" vertex="1" parent="1">
+          <mxGeometry x="456" y="553.5" width="78" height="73" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-20" target="9yRi2wLpPt7sHVXWHrIx-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-20" value="Service Auth&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/compute/Azure_Spring_Cloud.svg;" vertex="1" parent="1">
+          <mxGeometry x="461" y="750" width="68" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-22" target="9yRi2wLpPt7sHVXWHrIx-38">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="940" y="590" />
+              <mxPoint x="940" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-22" target="9yRi2wLpPt7sHVXWHrIx-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-22" value="Service User&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/compute/Azure_Spring_Cloud.svg;" vertex="1" parent="1">
+          <mxGeometry x="780" y="556" width="68" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-23" value="User" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Azure_Database_for_PostgreSQL_servers.svg;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="560.5" width="44.84" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-38" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Cache_Redis_Product.svg;" vertex="1" parent="1">
+          <mxGeometry x="1022.6600000000001" y="460" width="59.52" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-49" target="9yRi2wLpPt7sHVXWHrIx-50">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-49" value="Service Task" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/compute/Azure_Spring_Cloud.svg;" vertex="1" parent="1">
+          <mxGeometry x="780" y="750" width="68" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-50" value="User" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Azure_Database_for_PostgreSQL_servers.svg;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="754.5" width="44.84" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-51" target="9yRi2wLpPt7sHVXWHrIx-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-51" value="Service Attendance&lt;div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/compute/Azure_Spring_Cloud.svg;" vertex="1" parent="1">
+          <mxGeometry x="780" y="351" width="68" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-52" value="Attendance" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Azure_Database_for_PostgreSQL_servers.svg;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="355.5" width="44.84" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-54" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.015;entryY=0.537;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-9" target="9yRi2wLpPt7sHVXWHrIx-51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9yRi2wLpPt7sHVXWHrIx-56" style="edgeStyle=entityRelationEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.015;entryY=0.537;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="9yRi2wLpPt7sHVXWHrIx-9" target="9yRi2wLpPt7sHVXWHrIx-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
