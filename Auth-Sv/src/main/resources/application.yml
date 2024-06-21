@@ -1,32 +1,10 @@
-server:
-  port: 8083
-
 spring:
   main:
     banner-mode: off
   application:
     name: auth
+  profiles:
+    active: dev
 
-  ##Connect to database
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/EduDb
-    username: postgres
-    password: Hoanglam06112003@
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    database: postgresql
-
-jwt:
-  secret: 873465734658734658734658734658734345235G534G5345f5345H3J4535GJ345S345HY4535GDF345DSF34568324HGH345JD534SF
-  expiresTime: 3600000
-
-templateUrl: http://core/api/v1/core/user/register
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+templateSignUpUrl: http://user/api/v1/user
+templateLoginUrl: http://user/api/v1/user/username

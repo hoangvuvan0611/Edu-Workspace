@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+server:
+  port: 8083
+
+jwt:
+  secret: 873465734658734658734658734658734345235G534G5345f5345H3J4535GJ345S345HY4535GDF345DSF34568324HGH345JD534SF
+  expiresTime: 3600000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

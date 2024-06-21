@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegisterUserRequest {
     @NotBlank(message = "Name cannot be blank")
-    private String userName;
+    private String username;
 
     @Email(regexp = ValidateAttribute.EMAIL_REGEX, message = "Invalid email!")
     private String email;

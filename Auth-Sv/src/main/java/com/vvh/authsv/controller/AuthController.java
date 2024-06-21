@@ -25,24 +25,25 @@ public class AuthController {
     }
 
     @Operation(method = "POST", summary = "Register new user", description = "Send a request via this api to register new user")
-    @PostMapping("/register")
+    @PostMapping("/signup")
     public ResponseData<?> registerUser(@Valid @RequestBody RegisterUserRequest request) {
-        log.info(request.getUserName());
+        log.info("SignUp user request: {}", request);
         try{
             authService.registerUser(request);
-            return new ResponseData<>(true ,HttpStatus.CREATED.value(), "User registered successfully");
+            return new ResponseData<>(true ,HttpStatus.CREATED.value(), "User signup successfully");
         } catch (AlreadyExistsException ex){
+            log.error(ex.getMessage());
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
         }
     }
 
     @PostMapping("/login")
     public ResponseData<?> authUser(@Valid @RequestBody AuthRequest request){
-        log.info(request.getUserName());
         try{
             AuthResponse authResponse = authService.authUser(request);
             return new ResponseData<>(true, HttpStatus.OK.value(), "User logged in successfully", authResponse);
         } catch (Exception ex) {
+            log.error("Error while logging in", ex);
             return new ResponseError(HttpStatus.NOT_FOUND.value(), ex.getMessage());
         }
     }

@@ -12,6 +12,7 @@
         <module name="Discovery-Server" />
         <module name="Api-Gateway" />
         <module name="Auth-Sv" />
+        <module name="User-Sv" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -27,6 +28,7 @@
       <module name="Discovery-Server" options="-parameters" />
       <module name="Edu-Workspace" options="" />
       <module name="Manager-Sv" options="-parameters" />
+      <module name="User-Sv" options="-parameters" />
     </option>
   </component>
 </project>

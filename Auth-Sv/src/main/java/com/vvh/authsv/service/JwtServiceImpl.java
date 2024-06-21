@@ -1,7 +1,6 @@
 package com.vvh.authsv.service;
 
 import com.vvh.authsv.constant.TypeToken;
-import com.vvh.authsv.entity.User;
 import io.jsonwebtoken.*;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -29,15 +28,16 @@ public class JwtServiceImpl implements JwtService{
 
     @Override
     public String generateToken(Authentication authentication, TypeToken tokenType) {
-        User user = (User) authentication.getPrincipal();
+//        User user = (User) authentication.getPrincipal();
+
 
         long exTime = TypeToken.ACCESS.equals(tokenType)
                 ? Long.parseLong(expiresTime)
                 : Long.parseLong(expiresTime)  * 5;
 
         return Jwts.builder()
-                .setSubject(user.getEmail())
-                .claim("role", user.getRole())
+//                .setSubject(user.getEmail())
+//                .claim("role", user.getRole())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + exTime))
                 .signWith(SignatureAlgorithm.HS512, SECRET)

@@ -1,6 +1,5 @@
 package com.vvh.apigateway.filter;
 
-
 import com.vvh.apigateway.util.JwtUtil;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -32,13 +31,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
             ServerHttpRequest request = exchange.getRequest();
             if(routerValidator.isSecured.test(request)){
                 //Header contains token or not
-                if(authMissing(request))
-                    return onError(exchange);
-
+                if(authMissing(request)) return onError(exchange);
                 String token = Objects.requireNonNull(request.getHeaders().get(HttpHeaders.AUTHORIZATION)).get(0);
-                if(token != null && token.startsWith("Bearer "))
-                    token = token.substring(7);
-
+                if(token != null && token.startsWith("Bearer ")) token = token.substring(7);
                 try{
                     jwtUtil.validateToken(token);
                 }catch (Exception ex) {

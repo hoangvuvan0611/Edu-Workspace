@@ -1,0 +1,54 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  cloud:
+    gateway:
+      routes:
+        - id: core
+          uri: lb://core
+          predicates:
+            - Path=/api/v1/core/**
+          filters:
+            # When there is a call from the path /api/v1/core/**, it is redirected to AuthenticationFilter
+            - AuthenticationFilter
+        - id: user
+          uri: lb://user
+          predicates: Path=/api/v1/user/**
+          filters:
+            - AuthenticationFilter
+        - id: auth
+          uri: lb://auth
+          predicates: Path=/api/v1/auth/**
+
+      global cors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowed-headers: '*'
+            allowedMethods:
+              - GET
+              - POST
+            allow-credentials: true
+            maxAge: 3600
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        cloud:
+          gateway: TRACE
+          route:
+            RouteDefinitionLocator: INFO
+
+jwt:
+  secret: 873465734658734658734658734658734345235G534G5345f5345H3J4535GJ345S345HY4535GDF345DSF34568324HGH345JD534SF

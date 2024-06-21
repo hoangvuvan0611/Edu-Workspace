@@ -36,6 +36,7 @@
         <module>Api-Gateway</module>
         <module>Core-Sv</module>
         <module>Auth-Sv</module>
+        <module>User-Sv</module>
     </modules>
     <build>
         <plugins>
